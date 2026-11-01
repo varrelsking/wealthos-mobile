@@ -863,7 +863,265 @@ document.addEventListener('visibilitychange',async()=>{if(document.visibilitySta
 setInterval(async()=>{if(document.visibilityState==='visible'&&user){await loadData(true);await refreshCryptoPrices();}},60000);
 setup().catch(e=>{document.querySelector('#loading').classList.add('hidden');status('Setup error');notify(e.message,true);});
 </script>
-      if(update){event.preventDefault();event.stopPropagation();await refreshGoldPrice(true);}
+<script>
+/* WEALTHOS_MOBILE_V6_DRAFT_GOLD
+ * Additive patch to WealthOS Mobile V5, preserving all existing features.
+ */
+(() => {
+  'use strict';
+  const goldSymbol = 'EMAS';
+  const goldPollMs = 30 * 60 * 1000;
+  const gramPerTroyOunce = 31.1034768;
+  let goldLastAttempt = 0;
+  let goldBusy = false;
+  let goldStatus = 'Waiting for gold price check.';
+  let submittedForm = null;
+  let forcedRedraw = false;
+  let viewBeforeDraw = page;
+
+  // Drafts contain only ordinary form fields, never access tokens or passwords.
+  // They stay in this browser's local storage, scoped by the Supabase user ID.
+  const draftStorageKey = () => 'wealthos_mobile_v6_drafts:' + (user?.id || 'signed-out');
+  const goldStorageKey = () => 'wealthos_mobile_v6_gold_gram:' + (user?.id || 'signed-out');
+  const safeGet = (key) => { try { return localStorage.getItem(key); } catch { return null; } };
+  const safeSet = (key, value) => { try { localStorage.setItem(key, value); } catch {} };
+  const safeRemove = (key) => { try { localStorage.removeItem(key); } catch {} };
+  const readDrafts = () => { try { return JSON.parse(safeGet(draftStorageKey()) || '{}') || {}; } catch { return {}; } };
+  const updateDrafts = drafts => safeSet(draftStorageKey(), JSON.stringify(drafts));
+  const formKey = form => {
+    if (!form) return '';
+    const formName = form.id || ['moveHoldingForm','basisForm','editAccountForm','editAssetForm'].find(c => form.classList.contains(c));
+    if (!formName) return '';
+    const detail = form.querySelector('input[name="id"],input[name="key"]')?.value || '';
+    return formName + ':' + detail;
+  };
+  const fieldsOf = form => [...form.querySelectorAll('input[name],select[name],textarea[name]')].filter(el => el.type !== 'file' && el.type !== 'password');
+  function captureForm(form) {
+    const key = formKey(form);
+    if (!key) return;
+    const values = {};
+    for (const el of fieldsOf(form)) {
+      values[el.name] = (el.type === 'checkbox' || el.type === 'radio') ? {checked:el.checked} : {value:el.value};
+    }
+    const drafts = readDrafts();
+    drafts[key] = {values, changedAt:Date.now()};
+    updateDrafts(drafts);
+    form.dataset.draftTouched = '1';
+    if (!form.querySelector('.wealthos-draft-note')) {
+      const p = document.createElement('p');
+      p.className = 'hint wealthos-draft-note';
+      p.textContent = 'Draft saved on this device. It will stay here if you switch apps or reload.';
+      form.appendChild(p);
+    }
+  }
+  function forgetForm(form) {
+    const key = formKey(form);
+    if (!key) return;
+    const drafts = readDrafts();
+    delete drafts[key];
+    updateDrafts(drafts);
+    if (form) delete form.dataset.draftTouched;
+  }
+  function captureVisibleForms() {
+    document.querySelectorAll('#app form[data-draft-touched="1"]').forEach(captureForm);
+  }
+  function restoreForms() {
+    const drafts = readDrafts();
+    for (const form of document.querySelectorAll('#app form')) {
+      const saved = drafts[formKey(form)];
+      if (!saved || !saved.values) continue;
+      // Rebuild the category choices first for restored Income/Transfer types.
+      if (form.id === 'transactionForm' && saved.values.type?.value) {
+        form.querySelector('[name="type"]').value = saved.values.type.value;
+        setTransactionType();
+      }
+      for (const field of fieldsOf(form)) {
+        const value = saved.values[field.name];
+        if (value === undefined) continue;
+        if ('checked' in value) field.checked = !!value.checked;
+        else if ('value' in value) field.value = value.value;
+      }
+      form.dataset.draftTouched = '1';
+      if (!form.querySelector('.wealthos-draft-note')) {
+        const note = document.createElement('p');
+        note.className = 'hint wealthos-draft-note';
+        note.textContent = 'Unsaved draft restored from this device.';
+        form.appendChild(note);
+      }
+    }
+  }
+  // Snapshot changes immediately, including date picker changes.
+  function onDraftInput(event) {
+    const form = event.target.closest?.('#app form');
+    if (form && event.target.matches?.('input,select,textarea')) captureForm(form);
+  }
+  document.addEventListener('input', onDraftInput, true);
+  document.addEventListener('change', onDraftInput, true);
+  document.addEventListener('submit', event => { submittedForm = event.target; }, true);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') captureVisibleForms(); });
+  window.addEventListener('pagehide', captureVisibleForms);
+
+  const baseRender = render;
+  render = function () {
+    if (!user) return;
+    // Periodic cloud/quote refresh must not replace an actively edited date input.
+    const focused = document.activeElement;
+    if (!forcedRedraw && focused?.closest?.('#app form') &&
+        focused.matches?.('input,select,textarea') && document.visibilityState === 'visible') return;
+    const previousPage = viewBeforeDraw;
+    const opened = [...document.querySelectorAll('#app details')].map((detail,i) => detail.open ? i : -1).filter(i=>i>=0);
+    captureVisibleForms();
+    baseRender();
+    restoreForms();
+    if (page === previousPage) {
+      const details = document.querySelectorAll('#app details');
+      for (const i of opened) if (details[i]) details[i].open = true;
+    }
+    viewBeforeDraw = page;
+  };
+
+  function redrawAfterSave(form) {
+    if (!form) return;
+    forgetForm(form);
+    // The successful write may already have rerendered the form.
+    // Do not let that newly rendered copy re-save the stale draft.
+    const submittedKey = formKey(form);
+    for (const shown of document.querySelectorAll('#app form')) {
+      if (formKey(shown) === submittedKey) delete shown.dataset.draftTouched;
+    }
+    forcedRedraw = true;
+    try { render(); } finally { forcedRedraw = false; }
+    submittedForm = null;
+  }
+  const baseSave = save;
+  save = async function (...args) {
+    const form = submittedForm?.isConnected &&
+      submittedForm.querySelector('button[type="submit"],button:not([type])')?.disabled
+      ? submittedForm : null;
+    const result = await baseSave(...args);
+    // A successful database write is the only time a form draft is discarded.
+    if (form) redrawAfterSave(form);
+    return result;
+  };
+  const baseMoveHolding = moveExistingHolding;
+  moveExistingHolding = async function (...args) {
+    const form = submittedForm?.isConnected &&
+      submittedForm.querySelector('button[type="submit"],button:not([type])')?.disabled
+      ? submittedForm : null;
+    const result = await baseMoveHolding(...args);
+    if (form) redrawAfterSave(form);
+    return result;
+  };
+
+  function goldEnabled() { return !!user && safeGet(goldStorageKey()) === 'yes'; }
+  function hasRecordedGold() { return items('trade').some(t => String(t.data.symbol||'').trim().toUpperCase()===goldSymbol); }
+  function lastVerifiedGoldQuote() {
+    const valid = rows.map(row=>({row, e:normalize(row)})).filter(({e}) => {
+      const f=e.fields||{};
+      return e.entity_kind==='quote' && e.op==='upsert' &&
+        String(f.symbol||'').toUpperCase()===goldSymbol && f.currency==='IDR' &&
+        String(f.source||'').startsWith('Gold API spot') && Number(f.price)>0;
+    }).sort((a,b)=>Date.parse(b.e.ts||b.row.created_at||0)-Date.parse(a.e.ts||a.row.created_at||0));
+    return valid[0]?.e.fields || null;
+  }
+  // When desktop Yahoo Finance overwrites EMAS with an unrelated ticker,
+  // use the most recent verified gold-per-gram quote instead.
+  const baseCalc = calc;
+  calc = function () {
+    const result = baseCalc();
+    if (!goldEnabled()) return result;
+    const savedGold = lastVerifiedGoldQuote();
+    if (!savedGold) return result;
+    const currentQuote = items('quote').find(q => String(q.data.symbol||'').toUpperCase()==='EMAS' && q.data.currency==='IDR')?.data;
+    if (String(currentQuote?.source||'').startsWith('Manual') &&
+        Date.parse(currentQuote?.at||0) > Date.parse(savedGold.at||0)) return result;
+    const price = Number(savedGold.price);
+    if (!Number.isFinite(price) || price<100000 || price>10000000) return result;
+    for (const p of result.positions) {
+      if(p.symbol!=='EMAS' || p.currency!=='IDR') continue;
+      const former = p.value;
+      p.price=price; p.fx=1; p.value=p.qty*price;
+      p.source=savedGold.source; p.asOf=savedGold.at;
+      p.profit=p.basisKnown ? p.value - p.cost : null;
+      const diff=p.value-former;
+      result.invested+=diff; result.net+=diff;
+    }
+    return result;
+  };
+
+  const basePortfolioPage = portfolioPage;
+  portfolioPage = function () {
+    let html=basePortfolioPage();
+    if (!hasRecordedGold()) return html;
+    const on=goldEnabled();
+    const note = panel(`<h3>EMAS — gold price per gram</h3>
+      <p class="hint">Optional: reference spot price for 24K gold in IDR <strong>per gram</strong> (XAU/USD ÷ 31.1034768 × USD/IDR). This is NOT necessarily Antam, Triv, or your dealer's retail/buyback price. Only enable if <strong>1 EMAS unit = 1 gram</strong> in your holdings.</p>
+      <p class="small muted">${esc(goldStatus)}${on?' · Automatic checking while open':''}</p>
+      <button class="btn smallbtn secondary" data-v6-gold-toggle="1" type="button">${on?'Disable automatic EMAS spot pricing':'Enable automatic EMAS per-gram pricing'}</button>
+      ${on?'<button class="btn smallbtn secondary" data-v6-gold-refresh="1" type="button" style="margin-left:6px">Refresh gold now</button>':''}
+      <p class="hint">Gold: <a href="https://gold-api.com/" target="_blank" rel="noopener">Gold API</a>. Exchange-rate attribution: <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener">Rates By Exchange Rate API</a> (daily FX). Last saved quote remains if offline.</p>`);
+    return html.replace('<h1>Investments</h1>', '<h1>Investments</h1>'+note);
+  };
+  const baseSettingsPage = settingsPage;
+  settingsPage = function () {
+    return baseSettingsPage()+panel(`<h3>Unsaved drafts</h3><p class="hint">Forms are saved locally on this device until submitted or cleared. Drafts are not encrypted; avoid entering private details on a shared device.</p><button class="btn smallbtn secondary" type="button" data-v6-clear-drafts="1">Clear saved drafts</button>`);
+  };
+
+  async function refreshGoldPrice(force=false) {
+    if(!user || !db || !goldEnabled() || goldBusy || document.visibilityState!=='visible') return;
+    const positions=calc().positions.filter(p=>p.symbol==='EMAS' && p.currency==='IDR');
+    if(!positions.length) { goldStatus='No EMAS holdings recorded in IDR. Use EMAS with grams as units.'; return; }
+    if (!force && Date.now()-goldLastAttempt<goldPollMs) return;
+    goldLastAttempt=Date.now(); goldBusy=true; goldStatus='Checking gold spot price and USD/IDR…';
+    try {
+      const [metalRes,fxRes]=await Promise.all([
+        fetch('https://api.gold-api.com/price/XAU',{cache:'no-store'}),
+        fetch('https://open.er-api.com/v6/latest/USD',{cache:'no-store'})
+      ]);
+      if(!metalRes.ok || !fxRes.ok) throw Error('Price source unavailable (HTTP '+metalRes.status+'/'+fxRes.status+')');
+      const metal=await metalRes.json(), fxData=await fxRes.json();
+      const ounceUsd=Number(metal.price), usdIdr=Number(fxData.rates?.IDR);
+      const metalTime=Date.parse(metal.updatedAt||''), fxTime=Date.parse(fxData.time_last_update_utc||'');
+      if (!Number.isFinite(ounceUsd)||ounceUsd<=100||ounceUsd>100000 ||
+          !Number.isFinite(usdIdr)||usdIdr<1000||usdIdr>50000 ||
+          !Number.isFinite(metalTime)||metalTime>Date.now()+5*60*1000||
+          Date.now()-metalTime>4*24*3600*1000 ||
+          !Number.isFinite(fxTime)||Date.now()-fxTime>7*24*3600*1000)
+        throw Error('Provider returned invalid or stale gold/FX data. Saved quote retained.');
+      const idrPerGram=(ounceUsd/gramPerTroyOunce)*usdIdr;
+      if(!Number.isFinite(idrPerGram)||idrPerGram<100000||idrPerGram>10000000)
+        throw Error('Gold price outside safety bounds. No quote saved.');
+      const oldGold=lastVerifiedGoldQuote();
+      const unchanged=oldGold && Math.abs(Number(oldGold.price)-idrPerGram)/idrPerGram<0.000001 &&
+        Date.now()-Date.parse(oldGold.at||0)<30*60*1000;
+      if(!unchanged){
+        const stamp=new Date().toISOString();
+        const {error}=await db.from('finance_records').insert({
+          id:crypto.randomUUID(),user_id:user.id,kind:'we_event',
+          data:{entity_kind:'quote',entity_id:'quote:EMAS:IDR',op:'upsert',
+            fields:{symbol:'EMAS',currency:'IDR',price:idrPerGram,fx:1,
+              source:'Gold API spot 24K reference IDR/gram; FX ExchangeRate-API daily',
+              at:new Date(metalTime).toISOString(),unit:'gram'},ts:stamp}
+        });
+        if(error) throw error;
+        await loadData(true);
+      }
+      goldStatus=`Spot reference ${fmt(idrPerGram)} / gram · gold ${new Date(metalTime).toLocaleString()} · FX ${new Date(fxTime).toLocaleDateString()}${unchanged?' (unchanged)':''}`;
+    } catch(e) { goldStatus='Gold auto-update unavailable: '+String(e.message||e).slice(0,160); }
+    finally { goldBusy=false; if(page==='portfolio'&&user) render(); }
+  }
+  document.addEventListener('click', async event => {
+    const toggle=event.target.closest('[data-v6-gold-toggle]');
+    const update=event.target.closest('[data-v6-gold-refresh]');
+    const clear=event.target.closest('[data-v6-clear-drafts]');
+    if(toggle){
+      event.preventDefault(); event.stopPropagation();
+      if(goldEnabled()) { safeRemove(goldStorageKey()); goldStatus='Automatic gold spot pricing disabled.'; render(); }
+      else if(confirm('Enable spot gold pricing for EMAS? Confirm that your recorded EMAS quantity is in GRAMS, where 1 EMAS unit = 1 gram. This is a spot reference, NOT Antam/Triv retail or buyback price.')) {
+        safeSet(goldStorageKey(),'yes'); render(); await refreshGoldPrice(true);
+      }
+    }
+    if(update){event.preventDefault();event.stopPropagation();await refreshGoldPrice(true);}
     if(clear){event.preventDefault();event.stopPropagation();if(confirm('Delete the unsaved form drafts stored in this browser? Saved financial records in Supabase will not be affected.')){
       safeRemove(draftStorageKey()); forcedRedraw=true;try{document.querySelectorAll('#app form').forEach(f=>delete f.dataset.draftTouched);render();}finally{forcedRedraw=false;}
       notify('Local drafts cleared. Saved Supabase records were not changed.');
