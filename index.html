@@ -9,7 +9,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png" />
 <link rel="apple-touch-icon" href="./icon-192.png" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<title>WealthOS Mobile — V4</title>
+<title>WealthOS Mobile — V5</title>
 <style>
 :root{color-scheme:dark;--bg:#0b1222;--panel:#14213a;--panel2:#192a47;--line:#293b59;--ink:#edf3ff;--muted:#9eafcc;--blue:#7b9bff;--green:#58ddb3;--red:#ff8c98}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top right,#1c2a52 0,transparent 44%),var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:wait}a{color:var(--blue)}header{max-width:840px;margin:auto;padding:23px 18px 13px;display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{font-size:23px;font-weight:800;letter-spacing:-.5px}.brand span{color:var(--blue)}.status{font-size:12px;color:var(--muted);text-align:right}.wrap{max-width:840px;margin:0 auto;padding:8px 18px 110px}h1{font-size:26px;letter-spacing:-.6px;margin:5px 0 16px}h2{font-size:18px;margin:21px 0 12px}h3{font-size:15px;margin:0 0 8px}p{margin:8px 0}.muted{color:var(--muted)}.small{font-size:12px}.panel{background:linear-gradient(150deg,var(--panel),#121e33);border:1px solid var(--line);border-radius:17px;padding:17px;margin:12px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.metric{min-width:0}.metric .value{font-size:clamp(17px,4.5vw,25px);font-weight:750;letter-spacing:-.5px;overflow-wrap:anywhere;margin-top:8px}.metric .small{margin:0}.highlight{border-color:#4564a8;background:linear-gradient(130deg,#1c3155,#15233c)}.row{display:flex;justify-content:space-between;align-items:center;gap:12px}.row>div{min-width:0}.amount{font-weight:700;white-space:nowrap}.pos{color:var(--green)}.neg{color:var(--red)}.divider{border-top:1px solid var(--line);margin:12px 0}.pill{font-size:11px;border-radius:99px;border:1px solid var(--line);padding:4px 9px;color:var(--muted)}.btn{background:#668bff;border:0;border-radius:11px;padding:12px 15px;color:#fff;font-weight:700;min-height:43px}.btn.secondary{background:var(--panel2);border:1px solid var(--line)}.btn.danger{background:#4e2637;color:#ffd8df}.btn.smallbtn{min-height:34px;padding:6px 10px;font-size:12px}.btn.full{width:100%}form{display:grid;gap:11px}label{display:block;color:var(--muted);font-size:12px;font-weight:650;margin-bottom:5px}input,select{background:#192742;color:var(--ink);border:1px solid #314360;border-radius:9px;padding:11px;width:100%;min-height:43px;outline:none}input:focus,select:focus{border-color:var(--blue)}input::placeholder{color:#7e91af}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.list-item{padding:11px 0;border-bottom:1px solid var(--line)}.list-item:last-child{border-bottom:0}.bar{height:8px;background:#263753;border-radius:99px;overflow:hidden;margin:8px 0 4px}.bar>span{display:block;height:100%;background:#7297ff;border-radius:99px}.bar>span.over{background:#ff9a9a}.notice{background:#233459;border:1px solid #395687;border-radius:11px;padding:12px;margin:12px 0;color:#d9e5ff;font-size:13px}.notice.error{background:#422435;border-color:#774052;color:#ffcad0}.empty{color:var(--muted);padding:16px 4px;text-align:center}.bottom{position:fixed;z-index:3;bottom:0;left:0;right:0;background:#101a2df5;border-top:1px solid var(--line);display:flex;justify-content:center;padding:7px max(9px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom));backdrop-filter:blur(14px)}.bottom button{background:none;border:0;color:var(--muted);font-size:10px;flex:1;max-width:144px;min-height:52px;padding:4px 1px}.bottom button b{display:block;font-size:20px;font-weight:400}.bottom button.active{color:#99b3ff}.auth{max-width:460px;margin:55px auto}.hidden,[hidden]{display:none!important}.topline{display:flex;gap:10px;justify-content:space-between;align-items:center}.wraptext{overflow-wrap:anywhere}.tag{color:var(--green);font-size:12px}button.textbtn{border:0;background:transparent;color:var(--red);font-size:12px;padding:4px}.stack{display:grid;gap:6px}.hint{font-size:12px;color:var(--muted)}@media(min-width:700px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.wrap{padding-bottom:90px}.metric .value{font-size:22px}}
@@ -49,6 +49,7 @@ const currentMonth = () => today().slice(0,7);
 const opts = (items,selected='') => items.map(x=>`<option value="${esc(x)}" ${x===selected?'selected':''}>${esc(x)}</option>`).join('');
 const panel = (html,cls='') => `<section class="panel ${cls}">${html}</section>`;
 let db=null,user=null,page='home',rows=[],records={},lastRefresh=null,loading=false,month=currentMonth();
+// WEALTHOS_INVESTMENT_ACCOUNTS_V5
 // Market prices are independent of recorded purchase costs.
 let cryptoStatus='Crypto auto-refresh not checked yet';
 let lastCryptoAttempt=0;
@@ -78,6 +79,8 @@ function valuationWarning(p) {
   return '';
 }
 
+
+
 function notify(message,isError=false){const e=document.querySelector('#alert');e.hidden=false;e.innerHTML=`<div class="notice ${isError?'error':''}">${esc(message)}</div>`;}
 function clearNotice(){document.querySelector('#alert').hidden=true;}
 function status(text){document.querySelector('#connection').textContent=text;}
@@ -85,6 +88,8 @@ function showLoggedIn(on){document.querySelector('#loading').classList.add('hidd
 function items(kind){return records[kind]||[];}
 function normalize(row){if(row.kind==='we_event')return row.data||{};const f=row.data||{};let key=row.id;if(row.kind==='budget')key=`budget:${f.month}:${f.category}`;if(row.kind==='quote')key=`quote:${f.symbol}:${f.currency}`;return {entity_kind:row.kind,entity_id:key,op:'upsert',fields:f,ts:row.created_at};}
 function rebuild(){const byEntity=new Map();const sorted=[...rows].sort((a,b)=>{const x=normalize(a),y=normalize(b);return String(x.ts||'').localeCompare(String(y.ts||''))||String(a.id).localeCompare(String(b.id));});for(const row of sorted){const e=normalize(row);if(!e.entity_kind||!e.entity_id)continue;const key=`${e.entity_kind}\u0000${e.entity_id}`;if(e.op==='delete')byEntity.delete(key);else byEntity.set(key,{kind:e.entity_kind,id:e.entity_id,data:e.fields||{},updatedAt:e.ts||row.created_at||''});}records={};for(const item of byEntity.values())(records[item.kind]??=[]).push(item);}
+// If a desktop sync overwrites an IDR manual price with a mismatched
+// USD stock quote, recover the last explicitly entered manual price.
 function lastManualQuote(symbol,currency){
   const history=[...rows].sort((a,b)=>String(b.created_at||normalize(b).ts||'').localeCompare(String(a.created_at||normalize(a).ts||'')));
   for(const row of history){
@@ -99,6 +104,7 @@ function lastManualQuote(symbol,currency){
   }
   return null;
 }
+// Existing-holding snapshots have action="Opening". They never move cash.
 function calc() {
   const accounts = items('account');
   const transactions = items('transaction');
@@ -159,10 +165,13 @@ function calc() {
     }
     holdings.set(key, h);
 
+    // Only real Buy and Sell trades affect money in the linked account.
     if (d.action === 'Buy') {
-      balances.set(account, (balances.get(account) || 0) - qty*price*fx-fee);
+      const fundedFrom = d.funding_account || account;
+      balances.set(fundedFrom, (balances.get(fundedFrom) || 0) - qty*price*fx-fee);
     } else if (d.action === 'Sell') {
-      balances.set(account, (balances.get(account) || 0) + qty*price*fx-fee);
+      const fundedFrom = d.funding_account || account;
+      balances.set(fundedFrom, (balances.get(fundedFrom) || 0) + qty*price*fx-fee);
     }
   }
 
@@ -170,6 +179,7 @@ function calc() {
     JSON.stringify([String(r.data.symbol || '').toUpperCase(), r.data.currency || 'IDR']),
     r.data
   ]));
+  // Cost basis corrections are accounting-only: no cash or trade effects.
   const basisOverrides = new Map(items('basis_override').map(r=>[
     basisKey(String(r.data.symbol||'').toUpperCase(), r.data.currency||'IDR',r.data.account||null),
     r.data
@@ -182,11 +192,16 @@ function calc() {
     const suspectSpyUSD = h.symbol==='SPY' && h.currency==='USD' &&
       Number(q.price)>0 && Number(q.price)<20;
     const unreliableQuote = yahooCurrencyMismatch || suspectSpyUSD;
+    // Do not silently use mismatched USD stock data or a suspiciously
+    // tiny SPY quote. Prefer prior explicit manual IDR valuation, then
+    // the original holding estimate, without making up a new price.
     const recoveredQuote = unreliableQuote ? lastManualQuote(h.symbol,h.currency) : null;
     const price = unreliableQuote ? n(recoveredQuote?.price)||h.lastPrice :
       (q.price === undefined ? h.lastPrice : n(q.price));
     let fx = unreliableQuote ? n(recoveredQuote?.fx)||h.lastFx :
       (q.fx === undefined ? h.lastFx : n(q.fx));
+    // If a USD quote was saved with FX=1, retain a previously known
+    // meaningful conversion rather than claiming $1 equals Rp1.
     if(h.currency!=='IDR' && fx<=1.01 && h.lastFx>1.01) fx=h.lastFx;
     const missingFx=h.currency!=='IDR' && fx<=1.01;
     const value = missingFx ? 0 : h.qty * price * fx;
@@ -195,6 +210,8 @@ function calc() {
     if(override){
       if(Number.isFinite(Number(override.baseline_raw_cost))&&n(override.baseline_qty)>0&&
          Number.isFinite(Number(override.corrected_total_idr))){
+        // Adjust original raw cost by a correction delta. New Buys add their
+        // real cost; subsequent Sells remove a proportional share of the delta.
         let delta=n(override.corrected_total_idr)-n(override.baseline_raw_cost);
         let rollingQty=n(override.baseline_qty);
         const later=trades.filter(r=>
@@ -257,6 +274,7 @@ function spentFor(m) {
     const amount=n(d.qty)*n(d.price)*n(d.fx);
     if(d.action==='Buy') add('Investments',amount);
     else if(d.action==='Sell') add('Investments',-amount);
+    // 'Opening' is not a purchase and is never a monthly expense.
   }
   return spent;
 }
@@ -271,6 +289,7 @@ function portfolioPage() {
   const c = calc();
   const accounts = items('account');
   const brokers = accounts.filter(a => a.data.kind === 'Broker Cash');
+  const openingRows = items('trade').filter(r => r.data.action === 'Opening');
   const brokerageOptions = brokers.map(a=>
     `<option value="${esc(a.id)}">${esc(a.data.name)}</option>`
   ).join('');
@@ -306,6 +325,21 @@ function portfolioPage() {
       ${valuationWarning(p)?`<div class="notice error">${esc(valuationWarning(p))}</div>`:''}
       ${p.price<=0?'<div class="small neg">No market price available — value may be incomplete.</div>':''}
       ${!items('quote').some(q=>String(q.data.symbol||'').toUpperCase()===p.symbol&&q.data.currency===p.currency)?'<div class="small muted">Valuation is an estimate from recorded entry, not a fetched market quote.</div>':''}
+      ${brokers.filter(a=>a.id!==p.account).length ? `<details class="editing">
+        <summary>Move ${esc(p.symbol)} to another investment account</summary>
+        <form class="moveHoldingForm">
+          <input type="hidden" name="key" value="${esc(key)}">
+          <div><label>New investment account</label><select name="target" required>
+            ${brokers.filter(a=>a.id!==p.account).map(a=>`<option value="${esc(a.id)}">${esc(a.data.name)}</option>`).join('')}
+          </select></div>
+          <label style="display:flex;align-items:flex-start;gap:8px;color:var(--ink);font-weight:500">
+            <input type="checkbox" name="correct_funding" style="width:18px;min-height:18px;flex:none;margin-top:1px;accent-color:var(--blue)">
+            Also correct the funding account for historical Buy/Sell transactions (changes cash balances)
+          </label>
+          <p class="hint">Moves all ${esc(p.symbol)} investment entries from ${esc(p.accountName)} to the selected account. Quantity and cost basis stay the same. If you leave the checkbox off, previous cash activity stays in its original account. No new Buy/Sell is created.</p>
+          <button class="btn smallbtn" type="submit">Move existing holding</button>
+        </form>
+      </details>` : ''}
       <details class="editing">
         <summary>Edit average buy price / cost</summary>
         <form class="basisForm">
@@ -328,7 +362,20 @@ function portfolioPage() {
     const value=c.positions.filter(p=>p.account===a.id).reduce((v,p)=>v+p.value,0);
     const freeCash=c.balances.get(a.id)||0;
     return `<div class="list-item"><div class="row"><strong>${esc(a.data.name)}</strong><strong>${fmt(value+freeCash)}</strong></div>
-      <div class="small muted">Investments: ${fmt(value)} · Available cash: ${fmt(freeCash)}</div></div>`;
+      <div class="small muted">Investments: ${fmt(value)} · Available cash: ${fmt(freeCash)}</div>
+      <details class="editing">
+        <summary>Rename / edit this investment account</summary>
+        <form class="editAccountForm">
+          <input type="hidden" name="id" value="${esc(a.id)}">
+          <div><label>Account name</label><input name="name" maxlength="70" required value="${esc(a.data.name)}"></div>
+          <div><label>Account type</label><select name="kind">${opts(ACCOUNT_TYPES,a.data.kind)}</select></div>
+          <div><label>Uninvested cash opening balance (IDR)</label><input name="opening" type="number" step="any" min="0" required value="${esc(a.data.opening||0)}"></div>
+          <button class="btn smallbtn" type="submit">Save changes</button>
+        </form>
+      </details>
+      <button type="button" class="textbtn" data-delete-account="${esc(a.id)}">Delete investment account</button>
+      <p class="hint">Delete is available only after its transactions and investment entries have been moved or removed.</p>
+    </div>`;
   }).join('') || '<p class="muted small">Create an investment account below.</p>';
 
   const openingForm = brokers.length ? panel(`
@@ -465,6 +512,8 @@ function accountsPage() {
 function settingsPage(){return `<h1>Settings</h1>${panel(`<h3>Account</h3><p class="wraptext">${esc(user?.email||'Signed in')}</p><p class="small muted">Supabase user ID: ${esc(user?.id||'')}</p><button class="btn secondary" data-action="sync">Refresh cloud data</button><p class="hint">Last check: ${lastRefresh?esc(lastRefresh.toLocaleString()):'Not yet'}</p><div class="divider"></div><button class="btn danger" data-action="logout">Sign out</button>`)}${panel(`<h3>About WealthOS Mobile</h3><p class="muted">Online mobile companion to your Windows application. Changes are saved to your Supabase account and should appear on Windows after desktop synchronization.</p><p class="hint">This version requires internet to save and load. It checks supported crypto quotes using CoinGecko while open, and reads synced desktop quotes for other investments. WealthOS Desktop uses local SQLite for offline access.</p>`)}`;}
 function render(){if(!user)return;const views={home,transactions:transactionsPage,budgets:budgetsPage,portfolio:portfolioPage,accounts:accountsPage,settings:settingsPage};document.querySelector('#app').innerHTML=(views[page]||home)();document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));if(page==='transactions')setTransactionType();}
 function setTransactionType(){const kind=document.querySelector('#transactionType')?.value;if(!kind)return;document.querySelector('#destinationGroup').hidden=kind!=='Transfer';document.querySelector('#categoryGroup').hidden=kind==='Transfer';document.querySelector('#transactionCategory').innerHTML=opts(kind==='Income'?INCOME:EXPENSE);}
+// Crypto-only independent mobile market price refresh.
+// CORS-permitting CoinGecko public endpoint; may be rate-limited.
 async function refreshCryptoPrices(force=false) {
   if (!user || !db || cryptoRefreshBusy || document.visibilityState !== 'visible') return;
   const now=Date.now();
@@ -497,15 +546,17 @@ async function refreshCryptoPrices(force=false) {
       if(!coin) continue;
       const idr=Number(coin.idr), usd=Number(coin.usd);
       const latest=Number(coin.last_updated_at);
+      // Reject obviously stale market data instead of labelling it live.
       if(!Number.isFinite(idr)||idr<=0||!Number.isFinite(usd)||usd<=0||
          !Number.isFinite(latest)||latest<=0||(Date.now()/1000-latest)>6*3600) continue;
       const price=p.currency==='IDR'?idr: p.currency==='USD'?usd:null;
-      if(!price) continue;
+      if(!price) continue; // Other currency markets require a reliable FX source.
       const fx=p.currency==='IDR'?1:idr/usd;
       const old=items('quote').find(r=>
         String(r.data.symbol||'').toUpperCase()===p.symbol&&
         (r.data.currency||'IDR')===p.currency
       )?.data||{};
+      // Ignore negligible price differences, except if market quote is stale.
       const oldAge=Date.now()-Date.parse(old.at||0);
       const unchanged=Number(old.price)>0 &&
         Math.abs(Number(old.price)-price)/price<0.0000001 &&
@@ -534,6 +585,61 @@ async function refreshCryptoPrices(force=false) {
   }
 }
 
+// Prevent removing a buy/opening that would leave a sale without holdings.
+async function moveExistingHolding(symbol,currency,oldAccount,newAccount,correctFunding) {
+  if(!user||!db) throw Error('Sign in to Supabase first.');
+  if(!newAccount||newAccount===oldAccount) throw Error('Choose a different investment account.');
+  if(!items('account').some(a=>a.id===newAccount&&a.data.kind==='Broker Cash'))
+    throw Error('Destination must be an existing investment account.');
+  const relevant=items('trade').filter(r=>
+    String(r.data.symbol||'').toUpperCase()===symbol &&
+    String(r.data.currency||'IDR')===currency && (r.data.account||null)===oldAccount
+  );
+  if(!relevant.length) throw Error('No investment entries found to move.');
+  if(items('trade').some(r=>
+    String(r.data.symbol||'').toUpperCase()===symbol &&
+    String(r.data.currency||'IDR')===currency && (r.data.account||null)===newAccount
+  )) throw Error('Destination already contains entries for this asset. Merge requires a separate cost-basis review.');
+  const p=calc().positions.find(x=>x.symbol===symbol&&x.currency===currency&&x.account===oldAccount);
+  if(!p) throw Error('The original holding is missing. Refresh the page.');
+  const oldBasisId=basisKey(symbol,currency,oldAccount);
+  const newBasisId=basisKey(symbol,currency,newAccount);
+  const basis=items('basis_override').find(r=>r.id===oldBasisId);
+  if(basis && items('basis_override').some(r=>r.id===newBasisId))
+    throw Error('The target holding has an existing cost-basis correction.');
+  const batch=[];
+  const mostRecentEvent=Math.max(0,...rows.map(r=>Date.parse(normalize(r).ts||'')).filter(Number.isFinite));
+  const baseTime=Math.max(Date.now(),mostRecentEvent+5);
+  const stamp=()=>new Date(baseTime+batch.length*3).toISOString();
+  const add=(kind,id,fields,op='upsert')=>{
+    const at=stamp();
+    batch.push({id:crypto.randomUUID(),user_id:user.id,kind:'we_event',data:{
+      entity_kind:kind,entity_id:id,op,fields,ts:at
+    }});
+  };
+  for(const r of relevant) {
+    const fields={...r.data,account:newAccount};
+    if(fields.action==='Buy'||fields.action==='Sell')
+      fields.funding_account=correctFunding?newAccount:(r.data.funding_account||oldAccount);
+    add('trade',r.id,fields);
+  }
+  if(basis) {
+    add('basis_override',oldBasisId,{},'delete');
+    add('basis_override',newBasisId,{
+      ...basis.data,symbol,currency,account:newAccount,
+      average_cost_idr:p.cost/p.qty,
+      baseline_qty:p.qty,baseline_raw_cost:p.rawCost,
+      corrected_total_idr:p.cost,
+      updated_at:new Date(baseTime+batch.length*3+5).toISOString()
+    });
+  }
+  // One authenticated database request; no new purchases are created.
+  const {error}=await db.from('finance_records').insert(batch);
+  if(error) throw error;
+  await loadData(true);
+  return relevant.length;
+}
+
 function validAfterTradeRemoval(tradeId) {
   const kept=[...items('trade')].filter(r=>r.id!==tradeId).sort((a,b)=>
     String(a.data.date||'').localeCompare(String(b.data.date||''))||a.id.localeCompare(b.id)
@@ -557,8 +663,21 @@ async function loadData(silent=false){if(!user||loading)return;loading=true;stat
 async function save(kind,fields,entityId=crypto.randomUUID(),isDelete=false){if(!user)throw Error('Please sign in first');const stamp=new Date().toISOString();const {error}=await db.from('finance_records').insert({id:crypto.randomUUID(),user_id:user.id,kind:'we_event',data:{entity_kind:kind,entity_id:entityId,op:isDelete?'delete':'upsert',fields:fields||{},ts:stamp}});if(error)throw error;await loadData();}
 async function login(){clearNotice();const btn=document.querySelector('#googleLogin');btn.disabled=true;try{const {error}=await db.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+location.pathname}});if(error)throw error;}catch(e){notify('Google sign-in failed: '+e.message,true);btn.disabled=false;}}
 async function setup(){if(!SUPABASE_URL.startsWith('https://')||!SUPABASE_PUBLISHABLE_KEY||SUPABASE_URL.includes('YOUR-PROJECT')||SUPABASE_PUBLISHABLE_KEY.includes('YOUR_KEY')){document.querySelector('#loading').classList.add('hidden');status('Setup needed');notify('Edit config.js and enter your Supabase project URL and publishable key.',true);return;}if(!window.supabase){document.querySelector('#loading').classList.add('hidden');status('Connection unavailable');notify('Could not load Supabase JavaScript. Check your internet connection.',true);return;}db=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,{auth:{flowType:'pkce',detectSessionInUrl:true,persistSession:true,autoRefreshToken:true}});document.querySelector('#googleLogin').addEventListener('click',login);const params=new URLSearchParams(location.search);const oauthError=params.get('error_description');if(oauthError)notify('Google sign-in: '+oauthError,true);const {data,error}=await db.auth.getUser();if(error&&!String(error.message).toLowerCase().includes('session'))notify('Auth: '+error.message,true);if(data?.user){user=data.user;showLoggedIn(true);await loadData();setTimeout(()=>refreshCryptoPrices(),0);}else{showLoggedIn(false);status('Sign in to continue');}db.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_OUT'){user=null;rows=[];records={};showLoggedIn(false);status('Signed out');}else if(event==='SIGNED_IN'&&session?.user?.id!==user?.id){user=session.user;showLoggedIn(true);setTimeout(async()=>{await loadData();await refreshCryptoPrices();},0);}});}
-document.addEventListener('submit',async e=>{const form=e.target;if(!form.classList.contains('basisForm') && !form.classList.contains('editAccountForm') && !form.classList.contains('editAssetForm') && (!form.id||!['transactionForm','budgetForm','tradeForm','openingHoldingForm','brokerForm','accountForm','assetForm','quoteForm'].includes(form.id)))return;e.preventDefault();const submit=form.querySelector('button[type="submit"],button:not([type])');if(submit)submit.disabled=true;const f=new FormData(form);try{
-if(form.classList.contains('basisForm')){
+// Every user action is validated before inserting an event.
+document.addEventListener('submit',async e=>{const form=e.target;if(!form.classList.contains('moveHoldingForm') && !form.classList.contains('basisForm') && !form.classList.contains('editAccountForm') && !form.classList.contains('editAssetForm') && (!form.id||!['transactionForm','budgetForm','tradeForm','openingHoldingForm','brokerForm','accountForm','assetForm','quoteForm'].includes(form.id)))return;e.preventDefault();const submit=form.querySelector('button[type="submit"],button:not([type])');if(submit)submit.disabled=true;const f=new FormData(form);try{
+if(form.classList.contains('moveHoldingForm')){
+  const [symbol,currency,oldAccount]=JSON.parse(decodeURIComponent(String(f.get('key'))));
+  const target=String(f.get('target')||'');
+  const correctFunding=f.has('correct_funding');
+  const sourceName=items('account').find(a=>a.id===oldAccount)?.data.name||'original account';
+  const destName=items('account').find(a=>a.id===target)?.data.name||'destination';
+  const note=correctFunding?'Historical Buy/Sell cash effects will also move.':'Historical cash balances will stay unchanged.';
+  if(!confirm(`Move all ${symbol} entries from ${sourceName} to ${destName}?\n${note}`)) return;
+  const moved=await moveExistingHolding(symbol,currency,oldAccount,target,correctFunding);
+  notify(`Moved ${moved} ${symbol} investment entry/entries to ${destName}. Your units and purchase cost remain unchanged.`);
+  return;
+}
+else if(form.classList.contains('basisForm')){
   const key=JSON.parse(decodeURIComponent(String(f.get('key'))));
   const [symbol,currency,account]=key;
   const p=calc().positions.find(x=>x.symbol===symbol&&x.currency===currency&&x.account===account);
@@ -579,7 +698,7 @@ else if(form.classList.contains('editAccountForm')){
   const opening=Number(f.get('opening'));
   if(!name||name.length>70||!ACCOUNT_TYPES.includes(kind)||!Number.isFinite(opening)||opening<0)
     throw Error('Check your account name, type and opening balance.');
-  const linkedTrades=items('trade').some(r=>r.data.account===id);
+  const linkedTrades=items('trade').some(r=>r.data.account===id||r.data.funding_account===id);
   if(old.data.kind==='Broker Cash'&&kind!=='Broker Cash'&&linkedTrades)
     throw Error('This brokerage account has investment entries. Keep its type as Broker Cash until you move/remove those entries. Renaming is still allowed.');
   if((old.data.kind==='Savings')!== (kind==='Savings') &&
@@ -657,7 +776,12 @@ document.addEventListener('click', async e => {
     const original=items('account').find(a=>a.id===id);
     if(!original) return;
     const linkedTransactions=items('transaction').filter(r=>r.data.account===id||r.data.to_account===id);
-    const linkedTrades=items('trade').filter(r=>r.data.account===id);
+    const linkedTrades=items('trade').filter(r=>r.data.account===id||r.data.funding_account===id);
+    const remainingCash=calc().balances.get(id)||0;
+    if(Math.abs(remainingCash)>0.01){
+      notify(`Cannot delete ${original.data.name}: this account still has ${fmt(remainingCash)} in cash. Transfer or reconcile the balance first.`,true);
+      return;
+    }
     if(linkedTransactions.length||linkedTrades.length){
       notify(`Cannot delete ${original.data.name}: ${linkedTransactions.length} linked transaction(s) and ${linkedTrades.length} investment entry/entries. Delete/correct/reassign those records first so cash and holdings are not orphaned.`,true);
       return;
@@ -682,6 +806,8 @@ document.addEventListener('click', async e => {
       const removed=kind==='trade'?items('trade').find(r=>r.id===id):null;
       const d=removed?.data;
       await save(kind,{},id,true);
+      // Removing a historic entry invalidates an old cost-basis snapshot.
+      // Clear it so corrected cost cannot silently become inaccurate.
       const affectedBasis=d?basisKey(String(d.symbol||'').toUpperCase(),d.currency||'IDR',d.account||null):null;
       if(affectedBasis && items('basis_override').some(r=>r.id===affectedBasis))
         await save('basis_override',{},affectedBasis,true);
