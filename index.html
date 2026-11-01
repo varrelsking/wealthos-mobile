@@ -863,5 +863,16 @@ document.addEventListener('visibilitychange',async()=>{if(document.visibilitySta
 setInterval(async()=>{if(document.visibilityState==='visible'&&user){await loadData(true);await refreshCryptoPrices();}},60000);
 setup().catch(e=>{document.querySelector('#loading').classList.add('hidden');status('Setup error');notify(e.message,true);});
 </script>
+      if(update){event.preventDefault();event.stopPropagation();await refreshGoldPrice(true);}
+    if(clear){event.preventDefault();event.stopPropagation();if(confirm('Delete the unsaved form drafts stored in this browser? Saved financial records in Supabase will not be affected.')){
+      safeRemove(draftStorageKey()); forcedRedraw=true;try{document.querySelectorAll('#app form').forEach(f=>delete f.dataset.draftTouched);render();}finally{forcedRedraw=false;}
+      notify('Local drafts cleared. Saved Supabase records were not changed.');
+    }}
+  },true);
+  setInterval(()=>refreshGoldPrice(false),60000);
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible') refreshGoldPrice(false);});
+  setTimeout(()=>refreshGoldPrice(false),3500);
+})();
+</script>
 </body>
 </html>
