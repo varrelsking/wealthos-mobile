@@ -12,7 +12,7 @@
 <title>WealthOS Mobile</title>
 <style>
 :root{color-scheme:dark;--bg:#0b1222;--panel:#14213a;--panel2:#192a47;--line:#293b59;--ink:#edf3ff;--muted:#9eafcc;--blue:#7b9bff;--green:#58ddb3;--red:#ff8c98}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top right,#1c2a52 0,transparent 44%),var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:wait}a{color:var(--blue)}header{max-width:840px;margin:auto;padding:23px 18px 13px;display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{font-size:23px;font-weight:800;letter-spacing:-.5px}.brand span{color:var(--blue)}.status{font-size:12px;color:var(--muted);text-align:right}.wrap{max-width:840px;margin:0 auto;padding:8px 18px 110px}h1{font-size:26px;letter-spacing:-.6px;margin:5px 0 16px}h2{font-size:18px;margin:21px 0 12px}h3{font-size:15px;margin:0 0 8px}p{margin:8px 0}.muted{color:var(--muted)}.small{font-size:12px}.panel{background:linear-gradient(150deg,var(--panel),#121e33);border:1px solid var(--line);border-radius:17px;padding:17px;margin:12px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.metric{min-width:0}.metric .value{font-size:clamp(17px,4.5vw,25px);font-weight:750;letter-spacing:-.5px;overflow-wrap:anywhere;margin-top:8px}.metric .small{margin:0}.highlight{border-color:#4564a8;background:linear-gradient(130deg,#1c3155,#15233c)}.row{display:flex;justify-content:space-between;align-items:center;gap:12px}.row>div{min-width:0}.amount{font-weight:700;white-space:nowrap}.pos{color:var(--green)}.neg{color:var(--red)}.divider{border-top:1px solid var(--line);margin:12px 0}.pill{font-size:11px;border-radius:99px;border:1px solid var(--line);padding:4px 9px;color:var(--muted)}.btn{background:#668bff;border:0;border-radius:11px;padding:12px 15px;color:#fff;font-weight:700;min-height:43px}.btn.secondary{background:var(--panel2);border:1px solid var(--line)}.btn.danger{background:#4e2637;color:#ffd8df}.btn.smallbtn{min-height:34px;padding:6px 10px;font-size:12px}.btn.full{width:100%}form{display:grid;gap:11px}label{display:block;color:var(--muted);font-size:12px;font-weight:650;margin-bottom:5px}input,select{background:#192742;color:var(--ink);border:1px solid #314360;border-radius:9px;padding:11px;width:100%;min-height:43px;outline:none}input:focus,select:focus{border-color:var(--blue)}input::placeholder{color:#7e91af}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.list-item{padding:11px 0;border-bottom:1px solid var(--line)}.list-item:last-child{border-bottom:0}.bar{height:8px;background:#263753;border-radius:99px;overflow:hidden;margin:8px 0 4px}.bar>span{display:block;height:100%;background:#7297ff;border-radius:99px}.bar>span.over{background:#ff9a9a}.notice{background:#233459;border:1px solid #395687;border-radius:11px;padding:12px;margin:12px 0;color:#d9e5ff;font-size:13px}.notice.error{background:#422435;border-color:#774052;color:#ffcad0}.empty{color:var(--muted);padding:16px 4px;text-align:center}.bottom{position:fixed;z-index:3;bottom:0;left:0;right:0;background:#101a2df5;border-top:1px solid var(--line);display:flex;justify-content:center;padding:7px max(9px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom));backdrop-filter:blur(14px)}.bottom button{background:none;border:0;color:var(--muted);font-size:10px;flex:1;max-width:144px;min-height:52px;padding:4px 1px}.bottom button b{display:block;font-size:20px;font-weight:400}.bottom button.active{color:#99b3ff}.auth{max-width:460px;margin:55px auto}.hidden,[hidden]{display:none!important}.topline{display:flex;gap:10px;justify-content:space-between;align-items:center}.wraptext{overflow-wrap:anywhere}.tag{color:var(--green);font-size:12px}button.textbtn{border:0;background:transparent;color:var(--red);font-size:12px;padding:4px}.stack{display:grid;gap:6px}.hint{font-size:12px;color:var(--muted)}.account-type-editor{margin:5px 0 9px}.account-type-editor summary{cursor:pointer;color:var(--blue);font-size:13px;padding:7px 0;list-style-position:inside}.account-type-editor form{margin:8px 0 12px;padding:12px;border-radius:10px;background:var(--panel2);border:1px solid var(--line)}@media(min-width:700px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.wrap{padding-bottom:90px}.metric .value{font-size:22px}}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top right,#1c2a52 0,transparent 44%),var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:wait}a{color:var(--blue)}header{max-width:840px;margin:auto;padding:23px 18px 13px;display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{font-size:23px;font-weight:800;letter-spacing:-.5px}.brand span{color:var(--blue)}.status{font-size:12px;color:var(--muted);text-align:right}.wrap{max-width:840px;margin:0 auto;padding:8px 18px 110px}h1{font-size:26px;letter-spacing:-.6px;margin:5px 0 16px}h2{font-size:18px;margin:21px 0 12px}h3{font-size:15px;margin:0 0 8px}p{margin:8px 0}.muted{color:var(--muted)}.small{font-size:12px}.panel{background:linear-gradient(150deg,var(--panel),#121e33);border:1px solid var(--line);border-radius:17px;padding:17px;margin:12px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.metric{min-width:0}.metric .value{font-size:clamp(17px,4.5vw,25px);font-weight:750;letter-spacing:-.5px;overflow-wrap:anywhere;margin-top:8px}.metric .small{margin:0}.highlight{border-color:#4564a8;background:linear-gradient(130deg,#1c3155,#15233c)}.row{display:flex;justify-content:space-between;align-items:center;gap:12px}.row>div{min-width:0}.amount{font-weight:700;white-space:nowrap}.pos{color:var(--green)}.neg{color:var(--red)}.divider{border-top:1px solid var(--line);margin:12px 0}.pill{font-size:11px;border-radius:99px;border:1px solid var(--line);padding:4px 9px;color:var(--muted)}.btn{background:#668bff;border:0;border-radius:11px;padding:12px 15px;color:#fff;font-weight:700;min-height:43px}.btn.secondary{background:var(--panel2);border:1px solid var(--line)}.btn.danger{background:#4e2637;color:#ffd8df}.btn.smallbtn{min-height:34px;padding:6px 10px;font-size:12px}.btn.full{width:100%}form{display:grid;gap:11px}label{display:block;color:var(--muted);font-size:12px;font-weight:650;margin-bottom:5px}input,select{background:#192742;color:var(--ink);border:1px solid #314360;border-radius:9px;padding:11px;width:100%;min-height:43px;outline:none}input:focus,select:focus{border-color:var(--blue)}input::placeholder{color:#7e91af}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.list-item{padding:11px 0;border-bottom:1px solid var(--line)}.list-item:last-child{border-bottom:0}.bar{height:8px;background:#263753;border-radius:99px;overflow:hidden;margin:8px 0 4px}.bar>span{display:block;height:100%;background:#7297ff;border-radius:99px}.bar>span.over{background:#ff9a9a}.notice{background:#233459;border:1px solid #395687;border-radius:11px;padding:12px;margin:12px 0;color:#d9e5ff;font-size:13px}.notice.error{background:#422435;border-color:#774052;color:#ffcad0}.empty{color:var(--muted);padding:16px 4px;text-align:center}.bottom{position:fixed;z-index:3;bottom:0;left:0;right:0;background:#101a2df5;border-top:1px solid var(--line);display:flex;justify-content:center;padding:7px max(9px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom));backdrop-filter:blur(14px)}.bottom button{background:none;border:0;color:var(--muted);font-size:10px;flex:1;max-width:144px;min-height:52px;padding:4px 1px}.bottom button b{display:block;font-size:20px;font-weight:400}.bottom button.active{color:#99b3ff}.auth{max-width:460px;margin:55px auto}.hidden,[hidden]{display:none!important}.topline{display:flex;gap:10px;justify-content:space-between;align-items:center}.wraptext{overflow-wrap:anywhere}.tag{color:var(--green);font-size:12px}button.textbtn{border:0;background:transparent;color:var(--red);font-size:12px;padding:4px}.stack{display:grid;gap:6px}.hint{font-size:12px;color:var(--muted)}@media(min-width:700px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.wrap{padding-bottom:90px}.metric .value{font-size:22px}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="./config.js"></script>
@@ -35,7 +35,6 @@ const SUPABASE_PUBLISHABLE_KEY = window.WEALTHOS_CONFIG?.publishableKey || '';
 const EXPENSE = ['Food & Drinks','Transport','Shopping','Education','Toiletries','Social','Entertainment','Bills','Health','Other'];
 const INCOME = ['Allowance','Salary','Freelance','Business','Gift','Dividend','Other'];
 const BUDGET = [...EXPENSE,'Investments','Emergency Savings'];
-const ACCOUNT_TYPES = ['Cash','Bank','E-wallet','Savings','Broker Cash'];
 const nf = new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0});
 const fmt = v => nf.format(Number(v)||0);
 const n = v => Number(v)||0;
@@ -54,18 +53,236 @@ function showLoggedIn(on){document.querySelector('#loading').classList.add('hidd
 function items(kind){return records[kind]||[];}
 function normalize(row){if(row.kind==='we_event')return row.data||{};const f=row.data||{};let key=row.id;if(row.kind==='budget')key=`budget:${f.month}:${f.category}`;if(row.kind==='quote')key=`quote:${f.symbol}:${f.currency}`;return {entity_kind:row.kind,entity_id:key,op:'upsert',fields:f,ts:row.created_at};}
 function rebuild(){const byEntity=new Map();const sorted=[...rows].sort((a,b)=>{const x=normalize(a),y=normalize(b);return String(x.ts||'').localeCompare(String(y.ts||''))||String(a.id).localeCompare(String(b.id));});for(const row of sorted){const e=normalize(row);if(!e.entity_kind||!e.entity_id)continue;const key=`${e.entity_kind}\u0000${e.entity_id}`;if(e.op==='delete')byEntity.delete(key);else byEntity.set(key,{kind:e.entity_kind,id:e.entity_id,data:e.fields||{}});}records={};for(const item of byEntity.values())(records[item.kind]??=[]).push(item);}
-function calc(){const accounts=items('account'),transactions=items('transaction'),trades=items('trade'),assets=items('asset');const balances=new Map(accounts.map(a=>[a.id,n(a.data.opening)]));for(const r of transactions){const d=r.data,amount=n(d.amount);if(d.type==='Income')balances.set(d.account,(balances.get(d.account)||0)+amount);else if(d.type==='Expense')balances.set(d.account,(balances.get(d.account)||0)-amount);else if(d.type==='Transfer'){balances.set(d.account,(balances.get(d.account)||0)-amount);balances.set(d.to_account,(balances.get(d.to_account)||0)+amount);}}
-const holdings=new Map();for(const r of [...trades].sort((a,b)=>String(a.data.date||'').localeCompare(String(b.data.date||''))||String(a.id).localeCompare(String(b.id)))){const d=r.data,k=`${String(d.symbol||'').toUpperCase()}|${d.currency||'IDR'}`;let h=holdings.get(k)||{symbol:String(d.symbol||'').toUpperCase(),currency:d.currency||'IDR',qty:0,cost:0,lastPrice:0,lastFx:1};const qty=n(d.qty),price=n(d.price),fx=n(d.fx)||1,fee=n(d.fee??d.fees);h.lastPrice=price;h.lastFx=fx;if(d.action==='Buy'){h.qty+=qty;h.cost+=qty*price*fx+fee;}else if(qty<=h.qty+1e-9&&h.qty>0){h.cost-=h.cost*(qty/h.qty);h.qty-=qty;}holdings.set(k,h);balances.set(d.account,(balances.get(d.account)||0)+(d.action==='Buy'?-qty*price*fx-fee:qty*price*fx-fee));}
-const quoteMap=new Map(items('quote').map(q=>[`${q.data.symbol}|${q.data.currency}`,q.data]));const positions=[...holdings.values()].filter(h=>h.qty>1e-8).map(h=>{const q=quoteMap.get(`${h.symbol}|${h.currency}`)||{};const price=q.price===undefined?h.lastPrice:n(q.price);const fx=q.fx===undefined?h.lastFx:n(q.fx);const value=h.qty*price*fx;return {...h,price,fx,value,profit:value-h.cost,source:q.source||'Last trade price',asOf:q.at||'Not refreshed'};});const cash=[...balances.values()].reduce((a,b)=>a+b,0),invested=positions.reduce((a,p)=>a+p.value,0),otherAssets=assets.filter(x=>x.data.type==='Asset').reduce((a,r)=>a+n(r.data.value),0),debts=assets.filter(x=>x.data.type==='Debt').reduce((a,r)=>a+n(r.data.value),0);return {balances,positions,cash,invested,otherAssets,debts,net:cash+invested+otherAssets-debts};}
-function spentFor(m){const spent={};const accKind=new Map(items('account').map(a=>[a.id,a.data.kind]));const add=(key,value)=>spent[key]=(spent[key]||0)+value;for(const r of items('transaction')){const d=r.data;if(String(d.date||'').slice(0,7)!==m)continue;const a=n(d.amount);if(d.type==='Expense')add(d.category||'Other',a);else if(d.type==='Transfer'){if(accKind.get(d.to_account)==='Savings'&&accKind.get(d.account)!=='Savings')add('Emergency Savings',a);if(accKind.get(d.account)==='Savings'&&accKind.get(d.to_account)!=='Savings')add('Emergency Savings',-a);}}for(const r of items('trade')){const d=r.data;if(String(d.date||'').slice(0,7)===m)add('Investments',n(d.qty)*n(d.price)*n(d.fx)*(d.action==='Buy'?1:-1));}return spent;}
+// Existing-holding snapshots have action="Opening". They never move cash.
+function calc() {
+  const accounts = items('account');
+  const transactions = items('transaction');
+  const trades = items('trade');
+  const assets = items('asset');
+  const balances = new Map(accounts.map(a => [a.id, n(a.data.opening)]));
+
+  for (const row of transactions) {
+    const d = row.data, amount = n(d.amount);
+    if (d.type === 'Income') {
+      balances.set(d.account, (balances.get(d.account) || 0) + amount);
+    } else if (d.type === 'Expense') {
+      balances.set(d.account, (balances.get(d.account) || 0) - amount);
+    } else if (d.type === 'Transfer') {
+      balances.set(d.account, (balances.get(d.account) || 0) - amount);
+      balances.set(d.to_account, (balances.get(d.to_account) || 0) + amount);
+    }
+  }
+
+  const holdings = new Map();
+  const ordered = [...trades].sort((a,b) =>
+    String(a.data.date || '').localeCompare(String(b.data.date || '')) ||
+    String(a.id).localeCompare(String(b.id))
+  );
+
+  for (const row of ordered) {
+    const d = row.data;
+    const symbol = String(d.symbol || '').toUpperCase();
+    const currency = String(d.currency || 'IDR');
+    const account = d.account || null;
+    const key = JSON.stringify([symbol, currency, account]);
+    const h = holdings.get(key) || {
+      symbol, currency, account, qty:0, cost:0,
+      unknownQty:0, lastPrice:0, lastFx:1
+    };
+    const qty = n(d.qty);
+    const price = n(d.price);
+    const fx = n(d.fx) || 1;
+    const fee = n(d.fee ?? d.fees);
+    if (qty <= 0) continue;
+
+    if (d.action === 'Buy' || d.action === 'Opening') {
+      h.qty += qty;
+      if (d.action === 'Opening' && d.basis_known === false) {
+        h.unknownQty += qty;
+      } else {
+        h.cost += qty * price * fx + fee;
+      }
+      h.lastPrice = n(d.market_price) || price;
+      h.lastFx = n(d.market_fx) || fx;
+    } else if (d.action === 'Sell' && h.qty > 0 && qty <= h.qty + 1e-8) {
+      const proportion = Math.min(qty / h.qty, 1);
+      h.cost -= h.cost * proportion;
+      h.unknownQty *= (1 - proportion);
+      h.qty = Math.max(0, h.qty - qty);
+      h.lastPrice = price;
+      h.lastFx = fx;
+    }
+    holdings.set(key, h);
+
+    // Only real Buy and Sell trades affect money in the linked account.
+    if (d.action === 'Buy') {
+      balances.set(account, (balances.get(account) || 0) - qty*price*fx-fee);
+    } else if (d.action === 'Sell') {
+      balances.set(account, (balances.get(account) || 0) + qty*price*fx-fee);
+    }
+  }
+
+  const quoteMap = new Map(items('quote').map(r => [
+    JSON.stringify([String(r.data.symbol || '').toUpperCase(), r.data.currency || 'IDR']),
+    r.data
+  ]));
+  const accountNames = new Map(accounts.map(a => [a.id, a.data.name]));
+  const positions = [...holdings.values()].filter(h => h.qty > 1e-8).map(h => {
+    const q = quoteMap.get(JSON.stringify([h.symbol,h.currency])) || {};
+    const price = q.price === undefined ? h.lastPrice : n(q.price);
+    const fx = q.fx === undefined ? h.lastFx : n(q.fx);
+    const value = h.qty * price * fx;
+    const basisKnown = h.unknownQty < 1e-8;
+    return {
+      ...h,price,fx,value,basisKnown,
+      profit:basisKnown ? value - h.cost : null,
+      accountName:accountNames.get(h.account) || 'Unassigned',
+      source:q.source || 'Opening estimate / last trade',
+      asOf:q.at || 'Not refreshed'
+    };
+  });
+  const cash = [...balances.values()].reduce((a,b)=>a+b,0);
+  const invested = positions.reduce((a,p)=>a+p.value,0);
+  const otherAssets=assets.filter(x=>x.data.type==='Asset').reduce((a,r)=>a+n(r.data.value),0);
+  const debts=assets.filter(x=>x.data.type==='Debt').reduce((a,r)=>a+n(r.data.value),0);
+  return {balances,positions,cash,invested,otherAssets,debts,net:cash+invested+otherAssets-debts};
+}
+
+function spentFor(m) {
+  const spent={};
+  const accKind=new Map(items('account').map(a=>[a.id,a.data.kind]));
+  const add=(key,value)=>spent[key]=(spent[key]||0)+value;
+  for (const r of items('transaction')) {
+    const d=r.data;
+    if (String(d.date||'').slice(0,7)!==m) continue;
+    const amount=n(d.amount);
+    if (d.type==='Expense') add(d.category||'Other',amount);
+    else if(d.type==='Transfer') {
+      if(accKind.get(d.to_account)==='Savings'&&accKind.get(d.account)!=='Savings') add('Emergency Savings',amount);
+      if(accKind.get(d.account)==='Savings'&&accKind.get(d.to_account)!=='Savings') add('Emergency Savings',-amount);
+    }
+  }
+  for(const r of items('trade')) {
+    const d=r.data;
+    if(String(d.date||'').slice(0,7)!==m) continue;
+    const amount=n(d.qty)*n(d.price)*n(d.fx);
+    if(d.action==='Buy') add('Investments',amount);
+    else if(d.action==='Sell') add('Investments',-amount);
+    // 'Opening' is not a purchase and is never a monthly expense.
+  }
+  return spent;
+}
+
 function accountOptions(){return items('account').map(a=>`<option value="${esc(a.id)}">${esc(a.data.name)}</option>`).join('');}
 function metric(label,value,extra=''){return panel(`<div class="metric"><p class="small muted">${esc(label)}</p><div class="value">${fmt(value)}</div>${extra?`<p class="small muted">${extra}</p>`:''}</div>`);}
 function budgetBars(m){const spent=spentFor(m);const budgets=items('budget').filter(x=>x.data.month===m);if(!budgets.length)return '<div class="empty">No monthly budgets set yet.</div>';return budgets.map(r=>{const d=r.data,limit=n(d.limit),actual=n(spent[d.category]),ratio=limit>0?actual/limit:0;return `<div class="list-item"><div class="row"><strong>${esc(d.category)}</strong><span class="small muted">${fmt(actual)} / ${fmt(limit)}</span></div><div class="bar"><span class="${ratio>1?'over':''}" style="width:${Math.min(Math.max(ratio*100,0),100)}%"></span></div></div>`;}).join('');}
 function home(){const c=calc();const recent=[...items('transaction')].sort((a,b)=>String(b.data.date||'').localeCompare(String(a.data.date||''))).slice(0,5);return `<h1>Financial Overview</h1><div class="grid">${metric('Net worth',c.net)}${metric('Cash & banks',c.cash)}${metric('Investments',c.invested)}${metric('Debts',c.debts)}</div>${panel(`<div class="topline"><h3>Monthly spending</h3><span class="pill">${esc(month)}</span></div>${budgetBars(month)}`)}${panel(`<h3>Recent activity</h3>${recent.length?recent.map(r=>`<div class="list-item row"><div><strong>${esc(r.data.note||r.data.category||r.data.type)}</strong><div class="small muted">${esc(r.data.date)} · ${esc(r.data.type)}</div></div><span class="amount ${r.data.type==='Expense'?'neg':'pos'}">${r.data.type==='Expense'?'-':r.data.type==='Income'?'+':''}${fmt(r.data.amount)}</span></div>`).join(''):'<div class="empty">No transactions yet.</div>'}`)}${panel(`<h3>Account balances</h3>${items('account').length?items('account').map(a=>`<div class="row list-item"><div>${esc(a.data.name)} <span class="small muted">${esc(a.data.kind)}</span></div><strong>${fmt(c.balances.get(a.id)||0)}</strong></div>`).join(''):'<div class="empty">Add your first account.</div>'}`)}`;}
 function transactionsPage(){const acc=items('account');return `<h1>Transactions</h1>${acc.length?panel(`<h3>Add transaction</h3><form id="transactionForm"><div class="two"><div><label>Type</label><select name="type" id="transactionType"><option>Expense</option><option>Income</option><option>Transfer</option></select></div><div><label>Date</label><input name="date" type="date" value="${today()}" required></div></div><div><label>Amount (IDR)</label><input name="amount" type="number" min="0.01" step="any" required placeholder="50000"></div><div><label>Account</label><select name="account" required>${accountOptions()}</select></div><div id="destinationGroup" hidden><label>Destination account</label><select name="to_account">${accountOptions()}</select></div><div id="categoryGroup"><label>Category</label><select id="transactionCategory" name="category">${opts(EXPENSE)}</select></div><div><label>Description</label><input name="note" maxlength="200" placeholder="Lunch, transport, allowance..."></div><button class="btn full">Save transaction</button></form>`):panel('<p>Create an account before entering a transaction.</p>')}${panel(`<h3>Transaction history</h3>${[...items('transaction')].sort((a,b)=>String(b.data.date||'').localeCompare(String(a.data.date||''))).map(r=>`<div class="list-item"><div class="row"><div><strong>${esc(r.data.note||r.data.category||r.data.type)}</strong><div class="small muted">${esc(r.data.date)} · ${esc(r.data.category||r.data.type)}</div></div><strong class="amount ${r.data.type==='Expense'?'neg':''}">${fmt(r.data.amount)}</strong></div><button class="textbtn" data-delete-kind="transaction" data-delete-id="${esc(r.id)}">Delete</button></div>`).join('')||'<div class="empty">No transactions recorded.</div>'}`)}`;}
 function budgetsPage(){return `<h1>Monthly Budgets</h1>${panel(`<label>Month</label><input id="monthPicker" type="month" value="${esc(month)}">`)}${panel(`<h3>Set monthly category target</h3><form id="budgetForm"><div><label>Category</label><select name="category">${opts(BUDGET)}</select></div><div><label>Monthly limit (IDR)</label><input name="limit" type="number" min="0" step="any" required></div><button class="btn">Save budget</button></form>`)}${panel(`<h3>Budget vs actual</h3>${budgetBars(month)}<p class="hint">Investments and emergency savings are allocation targets, not everyday expenses.</p>`)}`;}
-function portfolioPage(){const c=calc();const account=items('account');return `<h1>Investments</h1>${metric('Portfolio value',c.invested)}${panel(`<h3>Holdings and P/L</h3><p class="hint">Prices come from the most recent quote synced from desktop, or the recorded trade price. They may be delayed.</p>${c.positions.map(p=>`<div class="list-item"><div class="row"><div><strong>${esc(p.symbol)}</strong><div class="small muted">${p.qty} units · ${esc(p.currency)}</div></div><strong>${fmt(p.value)}</strong></div><div class="row small"><span class="muted">Unrealized P/L</span><strong class="${p.profit>=0?'pos':'neg'}">${fmt(p.profit)}</strong></div><div class="small muted">${esc(p.source)} · ${esc(p.asOf)}</div></div>`).join('')||'<div class="empty">No investments recorded.</div>'}`)}${account.length?panel(`<h3>Record a trade</h3><form id="tradeForm"><div class="two"><div><label>Side</label><select name="action"><option>Buy</option><option>Sell</option></select></div><div><label>Trade date</label><input name="date" type="date" value="${today()}" required></div></div><div class="two"><div><label>Ticker</label><input name="symbol" placeholder="BBCA.JK" required></div><div><label>Currency</label><select name="currency">${opts(['IDR','USD','SGD','EUR'])}</select></div></div><div class="two"><div><label>Quantity</label><input name="qty" type="number" step="any" min="0.000001" required></div><div><label>Price per unit</label><input name="price" type="number" step="any" min="0.000001" required></div></div><div class="two"><div><label>FX (IDR per unit)</label><input name="fx" type="number" step="any" min="0.000001" value="1" required></div><div><label>Fee (IDR)</label><input name="fee" type="number" step="any" min="0" value="0" required></div></div><div><label>Funding account</label><select name="account">${accountOptions()}</select></div><button class="btn">Save trade</button></form>`):''}${c.positions.length?panel(`<h3>Manual market price (optional)</h3><form id="quoteForm"><div><label>Holding</label><select name="key">${c.positions.map(p=>`<option value="${esc(p.symbol+'|'+p.currency)}">${esc(p.symbol)} (${esc(p.currency)})</option>`).join('')}</select></div><div class="two"><div><label>Unit price</label><input name="price" type="number" min="0.000001" step="any" required></div><div><label>FX (IDR per unit)</label><input name="fx" type="number" min="0.000001" step="any" value="1" required></div></div><button class="btn secondary">Save corrected price</button></form>`):''}`;}
-function accountsPage(){const c=calc();return `<h1>Accounts & Assets</h1>${panel(`<h3>Cash and bank accounts</h3>${items('account').map(a=>`<div class="list-item"><div class="row"><div><strong>${esc(a.data.name)}</strong><div class="small muted">${esc(a.data.kind)}</div></div><strong>${fmt(c.balances.get(a.id)||0)}</strong></div><button class="textbtn" data-edit-account="${esc(a.id)}">Edit opening balance</button><details class="account-type-editor"><summary>Edit account type</summary><form data-account-type-form="${esc(a.id)}"><div><label>Account type</label><select name="kind" required>${opts(ACCOUNT_TYPES,a.data.kind)}</select></div><button class="btn secondary smallbtn" type="submit">Save account type</button></form></details><button class="textbtn" data-delete-kind="account" data-delete-id="${esc(a.id)}">Delete account</button></div>`).join('')||'<div class="empty">No accounts yet.</div>'}`)}${panel(`<h3>Create an account</h3><form id="accountForm"><div><label>Account name</label><input name="name" maxlength="70" required placeholder="BCA, Cash Wallet, Savings"></div><div><label>Account type</label><select name="kind">${opts(ACCOUNT_TYPES)}</select></div><div><label>Opening balance (IDR)</label><input name="opening" type="number" min="0" step="any" required value="0"></div><button class="btn">Add account</button></form>`)}${panel(`<h3>Other assets and debts</h3>${items('asset').map(a=>`<div class="list-item"><div class="row"><div><strong>${esc(a.data.name)}</strong><div class="small muted">${esc(a.data.type)}</div></div><strong>${fmt(a.data.value)}</strong></div><button class="textbtn" data-delete-kind="asset" data-delete-id="${esc(a.id)}">Delete</button></div>`).join('')||'<div class="empty">No assets or debts added.</div>'}<div class="divider"></div><form id="assetForm"><div><label>Name</label><input name="name" maxlength="100" required></div><div class="two"><div><label>Type</label><select name="type"><option>Asset</option><option>Debt</option></select></div><div><label>Value (IDR)</label><input name="value" type="number" step="any" min="0" required></div></div><button class="btn">Add asset / debt</button></form><p class="hint">Don't add shares here if they're already recorded in Investments.</p>`)}`;}
+function portfolioPage() {
+  const c = calc();
+  const accounts = items('account');
+  const brokers = accounts.filter(a => a.data.kind === 'Broker Cash');
+  const openingRows = items('trade').filter(r => r.data.action === 'Opening');
+  const brokerageOptions = brokers.map(a=>
+    `<option value="${esc(a.id)}">${esc(a.data.name)}</option>`
+  ).join('');
+
+  const positionsHtml = c.positions.map(p => `
+    <div class="list-item">
+      <div class="row">
+        <div><strong>${esc(p.symbol)}</strong>
+          <div class="small muted">${esc(p.accountName)} · ${esc(p.qty)} units · ${esc(p.currency)}</div>
+        </div>
+        <strong>${fmt(p.value)}</strong>
+      </div>
+      <div class="row small">
+        <span class="muted">Unrealized P/L</span>
+        <strong class="${p.profit===null?'muted':p.profit>=0?'pos':'neg'}">
+          ${p.profit===null?'Unknown purchase cost':fmt(p.profit)}
+        </strong>
+      </div>
+      <div class="small muted">${esc(p.source)} · ${esc(p.asOf)}</div>
+      ${p.price<=0?'<div class="small neg">No price yet — add a market price below to value this holding.</div>':''}
+    </div>`).join('') || '<div class="empty">No investments recorded yet.</div>';
+
+  const brokerSummary = brokers.map(a => {
+    const value=c.positions.filter(p=>p.account===a.id).reduce((v,p)=>v+p.value,0);
+    const freeCash=c.balances.get(a.id)||0;
+    return `<div class="list-item"><div class="row"><strong>${esc(a.data.name)}</strong><strong>${fmt(value+freeCash)}</strong></div>
+      <div class="small muted">Investments: ${fmt(value)} · Available cash: ${fmt(freeCash)}</div></div>`;
+  }).join('') || '<p class="muted small">Create an investment account below.</p>';
+
+  const openingForm = brokers.length ? panel(`
+    <h3>Add an investment I already own</h3>
+    <p class="hint">This is an opening balance, NOT a Buy. It does not spend cash or count toward this month's investment budget.</p>
+    <form id="openingHoldingForm">
+      <div><label>Investment account</label><select name="account">${brokerageOptions}</select></div>
+      <div class="two">
+        <div><label>Ticker / asset symbol</label><input name="symbol" placeholder="BBCA.JK, AAPL, BTC-USD" required></div>
+        <div><label>Currency</label><select name="currency">${opts(['IDR','USD','SGD','EUR'])}</select></div>
+      </div>
+      <div class="two">
+        <div><label>Units you already own</label><input name="qty" type="number" step="any" min="0.00000001" required></div>
+        <div><label>Holding snapshot date</label><input name="date" type="date" value="${today()}" required></div>
+      </div>
+      <div class="two">
+        <div><label>Original average purchase price / unit (optional)</label><input name="price" type="number" step="any" min="0" value="0"></div>
+        <div><label>Historical FX: IDR per currency unit</label><input name="fx" type="number" step="any" min="0.000001" value="1" required></div>
+      </div>
+      <div><label>Latest known market price / unit (optional)</label><input name="market_price" type="number" step="any" min="0" value="0"></div>
+      <p class="hint">Enter 0 for unknown purchase price. P/L will show “Unknown purchase cost.” For foreign-currency holdings, enter an appropriate IDR exchange rate. Market values may be delayed.</p>
+      <button class="btn full">Save existing holding — no cash deduction</button>
+    </form>
+  `) : panel('<h3>Add an investment I already own</h3><p>Create an investment account first using the form above.</p>');
+
+  const tradeForm = accounts.length ? panel(`
+    <h3>Record an actual new trade</h3>
+    <form id="tradeForm">
+      <div class="two"><div><label>Side</label><select name="action"><option>Buy</option><option>Sell</option></select></div>
+        <div><label>Trade date</label><input name="date" type="date" value="${today()}" required></div></div>
+      <div class="two"><div><label>Ticker</label><input name="symbol" placeholder="BBCA.JK" required></div>
+        <div><label>Currency</label><select name="currency">${opts(['IDR','USD','SGD','EUR'])}</select></div></div>
+      <div class="two"><div><label>Quantity</label><input name="qty" type="number" step="any" min="0.00000001" required></div>
+        <div><label>Price / unit</label><input name="price" type="number" step="any" min="0.000001" required></div></div>
+      <div class="two"><div><label>FX (IDR / unit)</label><input name="fx" type="number" step="any" min="0.000001" value="1" required></div>
+        <div><label>Fees (IDR)</label><input name="fee" type="number" min="0" step="any" value="0" required></div></div>
+      <div><label>Cash / funding account</label><select name="account">${accountOptions()}</select></div>
+      <button class="btn">Save buy / sell</button>
+    </form>
+  `) : '';
+
+  const quotesForm = c.positions.length ? panel(`
+    <h3>Manually update a market price</h3>
+    <p class="hint">This price applies to the same ticker across your investment accounts. Desktop auto-updates available tickers while running.</p>
+    <form id="quoteForm">
+      <div><label>Ticker</label><select name="key">${[...new Set(c.positions.map(p=>`${p.symbol}|${p.currency}`))].map(k=>`<option value="${esc(k)}">${esc(k)}</option>`).join('')}</select></div>
+      <div class="two"><div><label>Market price per unit</label><input name="price" type="number" min="0.000001" step="any" required></div>
+        <div><label>Current FX: IDR / unit</label><input name="fx" type="number" min="0.000001" step="any" value="1" required></div></div>
+      <button class="btn secondary">Save market price</button>
+    </form>
+  `) : '';
+
+  const openingRecords = openingRows.length ? panel(`
+    <h3>Existing-holding entries</h3>
+    <p class="hint">To correct an entry, delete the incorrect snapshot and add the corrected one. Be careful if you have recorded later trades.</p>
+    ${openingRows.map(r=>`<div class="list-item row"><div><strong>${esc(r.data.symbol)}</strong>
+    <div class="small muted">${esc(r.data.qty)} units · ${esc(r.data.date)} · ${esc(accounts.find(a=>a.id===r.data.account)?.data.name || 'Account')}</div></div>
+    <button class="textbtn" data-delete-kind="trade" data-delete-id="${esc(r.id)}">Delete</button></div>`).join('')}
+  `) : '';
+
+  return `<h1>Investments</h1>${metric('Portfolio value',c.invested)}
+    ${panel(`<h3>Investment accounts</h3>${brokerSummary}`)}
+    ${panel(`<h3>Current holdings and unrealized P/L</h3><p class="hint">Saved prices and estimates can be delayed. No cost basis means P/L is unavailable.</p>${positionsHtml}`)}
+    ${panel(`<h3>Create an investment / brokerage account</h3><form id="brokerForm">
+      <div><label>Account name</label><input name="name" placeholder="My broker / crypto wallet" maxlength="70" required></div>
+      <div><label>Cash NOT invested yet (IDR)</label><input name="opening" type="number" min="0" step="any" value="0" required></div>
+      <p class="hint">Do not enter the value of shares here. Enter only spare cash in the investment account, to avoid counting it twice.</p>
+      <button class="btn">Create investment account</button></form>`)}
+    ${openingForm}${tradeForm}${quotesForm}${openingRecords}`;
+}
+
+function accountsPage(){const c=calc();return `<h1>Accounts & Assets</h1>${panel(`<h3>Cash and bank accounts</h3>${items('account').map(a=>`<div class="list-item"><div class="row"><div><strong>${esc(a.data.name)}</strong><div class="small muted">${esc(a.data.kind)}</div></div><strong>${fmt(c.balances.get(a.id)||0)}</strong></div><button class="textbtn" data-edit-account="${esc(a.id)}">Edit opening balance</button></div>`).join('')||'<div class="empty">No accounts yet.</div>'}`)}${panel(`<h3>Create an account</h3><form id="accountForm"><div><label>Account name</label><input name="name" maxlength="70" required placeholder="BCA, Cash Wallet, Broker Cash"></div><div><label>Account type</label><select name="kind">${opts(['Cash','Bank','E-wallet','Savings','Broker Cash'])}</select></div><div><label>Opening balance (IDR)</label><input name="opening" type="number" min="0" step="any" required value="0"></div><button class="btn">Add account</button></form>`)}${panel(`<h3>Other assets and debts</h3>${items('asset').map(a=>`<div class="list-item"><div class="row"><div><strong>${esc(a.data.name)}</strong><div class="small muted">${esc(a.data.type)}</div></div><strong>${fmt(a.data.value)}</strong></div><button class="textbtn" data-delete-kind="asset" data-delete-id="${esc(a.id)}">Delete</button></div>`).join('')||'<div class="empty">No assets or debts added.</div>'}<div class="divider"></div><form id="assetForm"><div><label>Name</label><input name="name" maxlength="100" required></div><div class="two"><div><label>Type</label><select name="type"><option>Asset</option><option>Debt</option></select></div><div><label>Value (IDR)</label><input name="value" type="number" step="any" min="0" required></div></div><button class="btn">Add asset / debt</button></form><p class="hint">Create an account of type Broker Cash for your investment platform. Enter only its uninvested money as opening cash. Record shares in Investments, not here, to prevent double-counting.</p>`)}`;}
 function settingsPage(){return `<h1>Settings</h1>${panel(`<h3>Account</h3><p class="wraptext">${esc(user?.email||'Signed in')}</p><p class="small muted">Supabase user ID: ${esc(user?.id||'')}</p><button class="btn secondary" data-action="sync">Refresh cloud data</button><p class="hint">Last check: ${lastRefresh?esc(lastRefresh.toLocaleString()):'Not yet'}</p><div class="divider"></div><button class="btn danger" data-action="logout">Sign out</button>`)}${panel(`<h3>About WealthOS Mobile</h3><p class="muted">Online mobile companion to your Windows application. Changes are saved to your Supabase account and should appear on Windows after desktop synchronization.</p><p class="hint">This version does not store offline edits or fetch prices directly from Yahoo Finance. WealthOS Desktop continues to use local SQLite for offline access.</p>`)}`;}
 function render(){if(!user)return;const views={home,transactions:transactionsPage,budgets:budgetsPage,portfolio:portfolioPage,accounts:accountsPage,settings:settingsPage};document.querySelector('#app').innerHTML=(views[page]||home)();document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));if(page==='transactions')setTransactionType();}
 function setTransactionType(){const kind=document.querySelector('#transactionType')?.value;if(!kind)return;document.querySelector('#destinationGroup').hidden=kind!=='Transfer';document.querySelector('#categoryGroup').hidden=kind==='Transfer';document.querySelector('#transactionCategory').innerHTML=opts(kind==='Income'?INCOME:EXPENSE);}
@@ -73,77 +290,36 @@ async function loadData(silent=false){if(!user||loading)return;loading=true;stat
 async function save(kind,fields,entityId=crypto.randomUUID(),isDelete=false){if(!user)throw Error('Please sign in first');const stamp=new Date().toISOString();const {error}=await db.from('finance_records').insert({id:crypto.randomUUID(),user_id:user.id,kind:'we_event',data:{entity_kind:kind,entity_id:entityId,op:isDelete?'delete':'upsert',fields:fields||{},ts:stamp}});if(error)throw error;await loadData();}
 async function login(){clearNotice();const btn=document.querySelector('#googleLogin');btn.disabled=true;try{const {error}=await db.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+location.pathname}});if(error)throw error;}catch(e){notify('Google sign-in failed: '+e.message,true);btn.disabled=false;}}
 async function setup(){if(!SUPABASE_URL.startsWith('https://')||!SUPABASE_PUBLISHABLE_KEY||SUPABASE_URL.includes('YOUR-PROJECT')||SUPABASE_PUBLISHABLE_KEY.includes('YOUR_KEY')){document.querySelector('#loading').classList.add('hidden');status('Setup needed');notify('Edit config.js and enter your Supabase project URL and publishable key.',true);return;}if(!window.supabase){document.querySelector('#loading').classList.add('hidden');status('Connection unavailable');notify('Could not load Supabase JavaScript. Check your internet connection.',true);return;}db=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY,{auth:{flowType:'pkce',detectSessionInUrl:true,persistSession:true,autoRefreshToken:true}});document.querySelector('#googleLogin').addEventListener('click',login);const params=new URLSearchParams(location.search);const oauthError=params.get('error_description');if(oauthError)notify('Google sign-in: '+oauthError,true);const {data,error}=await db.auth.getUser();if(error&&!String(error.message).toLowerCase().includes('session'))notify('Auth: '+error.message,true);if(data?.user){user=data.user;showLoggedIn(true);await loadData();}else{showLoggedIn(false);status('Sign in to continue');}db.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_OUT'){user=null;rows=[];records={};showLoggedIn(false);status('Signed out');}else if(event==='SIGNED_IN'&&session?.user?.id!==user?.id){user=session.user;showLoggedIn(true);setTimeout(()=>loadData(),0);}});}
-
-// Editing an account type keeps its ID, opening balance, and linked records.
-// It uses the same event-log update format as WealthOS Desktop.
-document.addEventListener('submit', async e => {
-  const form = e.target;
-  if (!form.matches('[data-account-type-form]')) return;
-  e.preventDefault();
-
-  const id = form.dataset.accountTypeForm;
-  const original = items('account').find(a => a.id === id);
-  if (!original) {
-    notify('Account not found. Refresh and try again.', true);
-    return;
-  }
-
-  const selectedKind = new FormData(form).get('kind');
-  if (!ACCOUNT_TYPES.includes(selectedKind)) {
-    notify('Please choose a valid account type.', true);
-    return;
-  }
-  if (selectedKind === original.data.kind) {
-    notify('Account type is already set to ' + selectedKind + '.');
-    return;
-  }
-
-  const button = form.querySelector('button[type="submit"]');
-  if (button) button.disabled = true;
-  try {
-    // Preserve ALL existing fields, only replace account type.
-    await save('account', { ...original.data, kind: selectedKind }, id);
-    notify('Account type updated to ' + selectedKind + '. Synced to Supabase.');
-  } catch (err) {
-    notify('Could not update account type: ' + err.message, true);
-  } finally {
-    if (button && button.isConnected) button.disabled = false;
-  }
-});
-
 // Every user action is validated before inserting an event.
-document.addEventListener('submit',async e=>{const form=e.target;if(!form.id||!['transactionForm','budgetForm','tradeForm','accountForm','assetForm','quoteForm'].includes(form.id))return;e.preventDefault();const submit=form.querySelector('button[type="submit"],button:not([type])');if(submit)submit.disabled=true;const f=new FormData(form);try{if(form.id==='transactionForm'){const type=f.get('type'),amount=n(f.get('amount')),account=f.get('account'),to=f.get('to_account');if(amount<=0)throw Error('Amount must be greater than zero');if(type==='Transfer'&&account===to)throw Error('Choose two different accounts');await save('transaction',{date:f.get('date'),type,amount,account,to_account:type==='Transfer'?to:null,category:type==='Transfer'?'Transfer':f.get('category'),note:f.get('note')||''});}
+document.addEventListener('submit',async e=>{const form=e.target;if(!form.id||!['transactionForm','budgetForm','tradeForm','openingHoldingForm','brokerForm','accountForm','assetForm','quoteForm'].includes(form.id))return;e.preventDefault();const submit=form.querySelector('button[type="submit"],button:not([type])');if(submit)submit.disabled=true;const f=new FormData(form);try{if(form.id==='transactionForm'){const type=f.get('type'),amount=n(f.get('amount')),account=f.get('account'),to=f.get('to_account');if(amount<=0)throw Error('Amount must be greater than zero');if(type==='Transfer'&&account===to)throw Error('Choose two different accounts');await save('transaction',{date:f.get('date'),type,amount,account,to_account:type==='Transfer'?to:null,category:type==='Transfer'?'Transfer':f.get('category'),note:f.get('note')||''});}
 else if(form.id==='budgetForm'){const category=f.get('category');await save('budget',{month,category,limit:n(f.get('limit'))},`budget:${month}:${category}`);}
 else if(form.id==='accountForm'){await save('account',{name:String(f.get('name')).trim(),kind:f.get('kind'),opening:n(f.get('opening'))});}
 else if(form.id==='assetForm'){await save('asset',{name:String(f.get('name')).trim(),type:f.get('type'),value:n(f.get('value'))});}
-else if(form.id==='tradeForm'){const action=f.get('action'),symbol=String(f.get('symbol')||'').trim().toUpperCase(),currency=f.get('currency'),qty=n(f.get('qty')),price=n(f.get('price')),fx=n(f.get('fx')),fee=n(f.get('fee')),account=f.get('account');if(!symbol||qty<=0||price<=0||fx<=0||fee<0)throw Error('Enter valid trade details');const c=calc();if(action==='Buy'&&qty*price*fx+fee>(c.balances.get(account)||0))throw Error('Insufficient available cash in this account');const holding=c.positions.find(p=>p.symbol===symbol&&p.currency===currency);if(action==='Sell'&&qty>(holding?.qty||0)+1e-8)throw Error('Cannot sell more units than recorded');await save('trade',{date:f.get('date'),action,symbol,currency,qty,price,fx,fee,account});}
+else if(form.id==='brokerForm') {
+  const name=String(f.get('name')||'').trim();
+  const opening=Number(f.get('opening'));
+  if(!name||!Number.isFinite(opening)||opening<0) throw Error('Enter a name and valid uninvested cash amount.');
+  await save('account',{name,kind:'Broker Cash',opening});
+}
+else if(form.id==='openingHoldingForm') {
+  const account=f.get('account');
+  const symbol=String(f.get('symbol')||'').trim().toUpperCase();
+  const currency=f.get('currency');
+  const qty=Number(f.get('qty'));
+  const price=Number(f.get('price'));
+  const fx=Number(f.get('fx'));
+  const market_price=Number(f.get('market_price'));
+  if(!items('account').some(a=>a.id===account&&a.data.kind==='Broker Cash')) throw Error('Select an investment account.');
+  if(!symbol||!Number.isFinite(qty)||qty<=0||!Number.isFinite(price)||price<0||!Number.isFinite(fx)||fx<=0||!Number.isFinite(market_price)||market_price<0) throw Error('Check the quantity, price and exchange rate.');
+  await save('trade',{
+    date:f.get('date'),action:'Opening',symbol,currency,qty,price,fx,
+    market_price,market_fx:fx,fee:0,account,basis_known:price>0
+  });
+}
+else if(form.id==='tradeForm'){const action=f.get('action'),symbol=String(f.get('symbol')||'').trim().toUpperCase(),currency=f.get('currency'),qty=n(f.get('qty')),price=n(f.get('price')),fx=n(f.get('fx')),fee=n(f.get('fee')),account=f.get('account');if(!symbol||qty<=0||price<=0||fx<=0||fee<0)throw Error('Enter valid trade details');const c=calc();if(action==='Buy'&&qty*price*fx+fee>(c.balances.get(account)||0))throw Error('Insufficient available cash in this account');const holding=c.positions.find(p=>p.symbol===symbol&&p.currency===currency&&p.account===account);if(action==='Sell'&&qty>(holding?.qty||0)+1e-8)throw Error('Cannot sell more units than recorded');await save('trade',{date:f.get('date'),action,symbol,currency,qty,price,fx,fee,account});}
 else if(form.id==='quoteForm'){const [symbol,currency]=String(f.get('key')).split('|');const price=n(f.get('price')),fx=n(f.get('fx'));if(price<=0||fx<=0)throw Error('Enter valid price and exchange rate');await save('quote',{symbol,currency,price,fx,source:'Manual mobile',at:new Date().toISOString()},`quote:${symbol}:${currency}`);}
 notify('Saved to Supabase. Your desktop will receive it after synchronization.');}catch(err){notify('Could not save: '+err.message,true);}finally{if(submit)submit.disabled=false;}});
-document.addEventListener('click',async e=>{const nav=e.target.closest('[data-page]');if(nav){page=nav.dataset.page;clearNotice();render();window.scrollTo(0,0);return;}const del=e.target.closest('[data-delete-kind]');if(del){
-  const kind = del.dataset.deleteKind;
-  const id = del.dataset.deleteId;
-  if (kind === 'account') {
-    const linkedTransactions = items('transaction').some(r =>
-      r.data.account === id || r.data.to_account === id
-    );
-    const linkedTrades = items('trade').some(r => r.data.account === id);
-    if (linkedTransactions || linkedTrades) {
-      notify('Cannot delete this account: it is linked to transactions or investments. Correct or remove those records first.', true);
-      return;
-    }
-  }
-  const promptText = kind === 'account'
-    ? 'Delete this account? Its opening balance will be removed. This change will also sync with Windows.'
-    : 'Delete this record?';
-  if (!confirm(promptText)) return;
-  try {
-    await save(kind, {}, id, true);
-    notify(kind === 'account' ? 'Account deleted and synced.' : 'Record deleted.');
-  } catch (err) {
-    notify('Delete failed: ' + err.message, true);
-  }
-  return;
-}const edit=e.target.closest('[data-edit-account]');if(edit){const original=items('account').find(a=>a.id===edit.dataset.editAccount);if(!original)return;const answer=prompt('New opening balance (IDR)',String(original.data.opening||0));if(answer===null)return;const value=Number(answer);if(!Number.isFinite(value)||value<0){notify('Enter a valid, nonnegative number.',true);return;}try{await save('account',{...original.data,opening:value},original.id);notify('Opening balance updated.');}catch(err){notify('Update failed: '+err.message,true);}return;}const action=e.target.closest('[data-action]')?.dataset.action;if(action==='sync')await loadData();if(action==='logout'){await db.auth.signOut();}});
+document.addEventListener('click',async e=>{const nav=e.target.closest('[data-page]');if(nav){page=nav.dataset.page;clearNotice();render();window.scrollTo(0,0);return;}const del=e.target.closest('[data-delete-kind]');if(del){if(!confirm('Delete this record?'))return;try{await save(del.dataset.deleteKind,{},del.dataset.deleteId,true);notify('Record deleted.');}catch(err){notify('Delete failed: '+err.message,true);}return;}const edit=e.target.closest('[data-edit-account]');if(edit){const original=items('account').find(a=>a.id===edit.dataset.editAccount);if(!original)return;const answer=prompt('New opening balance (IDR)',String(original.data.opening||0));if(answer===null)return;const value=Number(answer);if(!Number.isFinite(value)||value<0){notify('Enter a valid, nonnegative number.',true);return;}try{await save('account',{...original.data,opening:value},original.id);notify('Opening balance updated.');}catch(err){notify('Update failed: '+err.message,true);}return;}const action=e.target.closest('[data-action]')?.dataset.action;if(action==='sync')await loadData();if(action==='logout'){await db.auth.signOut();}});
 document.addEventListener('change',e=>{if(e.target.id==='transactionType')setTransactionType();if(e.target.id==='monthPicker'){month=e.target.value||currentMonth();render();}});
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&user)loadData(true);});
 setInterval(()=>{if(document.visibilityState==='visible'&&user)loadData(true);},60000);
